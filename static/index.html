@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RegistrationForm</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Registration form</h1>
+    <form action="/reg-data" method="post" onsubmit="submitFunction(event)">
+        <div class="form-input" id="name-input-container">
+            <label for="name-input">Enter your name</label>
+            <input type="text" id="name-input" placeholder="Name" name="nameUser"/>
+        </div>
+        <div class="form-input" id="password-input-container">
+            <label for="password-input">Enter your password</label>
+            <input type="password" id="password-input" placeholder="Password" name="passwordUser"/>
+        </div>
+        <div class="form-input">
+            <fieldset>
+                <legend>Select your gender</legend>
+                <input type="radio" id="gender-male" name="genderUser" value="male" checked/>
+                <label for="gender-male">Male</label>
+                <input type="radio" id="gender-female" name="genderUser" value="female"/>
+                <label for="gender-female">Female</label>
+            </fieldset>
+        </div>
+        <div class="form-input">
+            <label for="user-type-input">Select user type</label>
+            <select id="user-type-input" name="typeUser">
+                <option value="Admin">Admin</option>
+                <option value="Moderator">Moderator</option>
+                <option value="User">User</option>
+            </select>
+        </div>
+        <input type="submit" id="submit-input" value="Submit form"/>
+    </form>
+</div>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
