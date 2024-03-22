@@ -93,3 +93,16 @@ function submitFunction(event) {
         event.preventDefault();                         //запрет отправки формы (события по умолчанию)
     }
 }
+
+const themeSwitch = document.querySelector("#theme-switch");
+
+//Событие при нажатии на кнопку для смены темы
+function changeThemeType() {
+    document.body.classList.toggle("dark-theme");
+    if (themeSwitch.classList.toggle("dark-theme")) {
+        themeSwitch.textContent = "DARK";
+    }
+    else {
+        themeSwitch.textContent = "LIGHT";
+    }
+}

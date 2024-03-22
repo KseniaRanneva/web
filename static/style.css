@@ -58,7 +58,7 @@ select:hover {
 }
 
 fieldset {
-    background-color: #f3f3f3;
+    background-color: transparent;
 }
 
 .input_error {
@@ -68,4 +68,20 @@ fieldset {
 .error_message {
     color: red;
     font-size: 12px;
+}
+
+.dark-theme {
+    background-color: #4f5665;
+    color: #ffffff;
+}
+
+#theme-switch {
+    padding: 0.3em 0.9em;
+    background-color: #ffffff;
+    border-radius: 0.7em;
+}
+
+#theme-switch.dark-theme {
+    background-color: #c8c8ff;
+    color: #000000;
 }
