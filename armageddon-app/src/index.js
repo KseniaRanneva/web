@@ -24,6 +24,11 @@ const router = createBrowserRouter([
         path: "/asteroid/:id",
         element: <Asteroid/>,
     },
+    {
+        //"Перенаправление" на главную страницу
+        path: "*",
+        element: <Asteroids/>,
+    },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

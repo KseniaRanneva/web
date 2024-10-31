@@ -1,0 +1,27 @@
+.action {
+    width: 25%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.actionGrade {
+
+}
+
+.actionText {
+    min-width: 140px;
+    height: 40px;
+    background: #1868d5;
+    color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+}
+
+.actionText:active {
+    opacity: 70%;
+}

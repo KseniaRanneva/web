@@ -1,0 +1,41 @@
+.container {
+    width: 60vw;
+    margin: 0 auto;
+    font-family: Arial;
+}
+
+.showDangerousOnly {
+
+}
+
+.displaySettings {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 2em;
+}
+
+.distanceMode {
+    flex-direction: column;
+    line-height: 24px;
+}
+
+.distanceChooser {
+    font-size: 16px;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    text-decoration: underline;
+    background: transparent;
+}
+.distanceChooser:hover {
+    cursor: pointer
+}
+
+.footer {
+    text-align: center;
+    font-size: 16px;
+    margin: 2em;
+    font-weight: bold;
+}

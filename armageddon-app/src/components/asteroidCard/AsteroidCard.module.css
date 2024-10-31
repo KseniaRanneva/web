@@ -1,0 +1,35 @@
+.card {
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2em;
+
+
+}
+
+/*обычная карточка*/
+.regularCard {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #CFF37D 0%, #7DE88C 100%);
+}
+
+/*красная карточка*/
+.redCard {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #FFB199 0%, #FF0844 100%);
+}
