@@ -5,9 +5,9 @@
 .asteroidImage {
     background-image: url("Asteroid.svg");
     background-repeat: no-repeat;
-    background-position-y: 30px;
-    background-position-x: 100px;
+    background-position: center;
     display: flex;
     justify-content: space-between;
     height: 100%;
+    width: 100%;
 }

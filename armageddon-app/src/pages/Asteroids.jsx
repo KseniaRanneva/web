@@ -1,12 +1,42 @@
 import {Header} from "../components/header/Header";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import styles from "./Asteroids.module.css";
 import {AsteroidCard, DangerAsteroidCard} from "../components/asteroidCard/AsteroidCard";
 
 export const Asteroids = () => {
-    const [asteroids] = useState(generateAsteroids());  //хук для хранения внутреннего состояния компонента
+    const [asteroids, setAsteroids] = useState([]);  //астероиды //хук для хранения внутреннего состояния компонента
     const [onlyDangerous, setOnlyDangerous] = useState(false);  //признак "опасных" астероидов
     const [distanceMode, setDistanceMode] = useState(true);    //тип единиц для отображения расстояния (true - км)
+
+    //Загрузка астероидов с API NASA        //запуск "эффектов"
+    useEffect(  () => {
+        const result = fetch("https://api.nasa.gov/neo/rest/v1/feed?api_key=DEMO_KEY").then((res) => {
+            return res.json();
+        }).then((response) => {
+            //получение свойств
+            let rawAsteroids = [];  //массив из объектов (астероидов)
+            for (const data in response.near_earth_objects) {
+                rawAsteroids = rawAsteroids.concat(response.near_earth_objects[data]);
+            }
+            const asteroids = rawAsteroids.map(item => {
+                //вычисление среднего значения размера астероида
+                const mediumSize = ((item.estimated_diameter.meters.estimated_diameter_max + item.estimated_diameter.meters.estimated_diameter_min)/2).toFixed(1);
+                const close = item.close_approach_data[0];  //данные о сближении
+                return {
+                    id: item.id,
+                    name: item.name,
+                    date: close.close_approach_date,
+                    distance: {kilometers: close.miss_distance.kilometers, lunar: close.miss_distance.lunar},
+                    size: mediumSize,
+                    isDangerous: item.is_potentially_hazardous_asteroid
+                }
+            });
+            setAsteroids(asteroids);
+        }).catch( (err) => {
+            console.log(err);
+            setAsteroids(generateAsteroids());
+        });
+    }, []);
 
     return <div className={styles.container}>
         <Header/>
@@ -26,8 +56,8 @@ export const Asteroids = () => {
         {
             //фильтр "опасных"
             onlyDangerous
-                ? asteroids.filter((item) => item.isDangerous).map((item) => <AsteroidCard {...item} distanceMode={distanceMode}/>)
-                : asteroids.map((item) => <AsteroidCard {...item} distanceMode={distanceMode}/>)
+                ? asteroids.filter((item) => item.isDangerous).map((item) => <AsteroidCard key={item.id} {...item} distanceMode={distanceMode}/>)
+                : asteroids.map((item) => <AsteroidCard key={item.id} {...item} distanceMode={distanceMode}/>)
         }
         <footer className={styles.footer}>2024 © Все права и планета защищены</footer>
     </div>
@@ -42,6 +72,8 @@ const generateAsteroids = () => {
 
     //цикл для генерации случайных астероидов
     for (let i = 0; i < 10; i++) {
+        //уникальный идентификатор астероида
+        const id = name;
         //наименование из 4 символов
         const name = characters[(Math.random() * 25).toFixed(0)] + characters[(Math.random() * 25).toFixed(0)] +
                      characters[(Math.random() * 25).toFixed(0)] + characters[(Math.random() * 25).toFixed(0)];
@@ -53,7 +85,7 @@ const generateAsteroids = () => {
         const size = (Math.random() * 100 + 10).toFixed(0);
         //признак опасности (true, если >= 0.5)
         const isDangerous = Math.random() >= 0.5;
-        result.push({name, date, distance, size, isDangerous});
+        result.push({id, name, date, distance, size, isDangerous});
     }
 
     return result;
