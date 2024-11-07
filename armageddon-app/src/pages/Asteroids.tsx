@@ -1,10 +1,20 @@
 import {Header} from "../components/header/Header";
 import {useEffect, useState} from "react";
 import styles from "./Asteroids.module.css";
-import {AsteroidCard, DangerAsteroidCard} from "../components/asteroidCard/AsteroidCard";
+import {AsteroidCard} from "../components/asteroidCard/AsteroidCard";
 
 export const Asteroids = () => {
-    const [asteroids, setAsteroids] = useState([]);  //астероиды //хук для хранения внутреннего состояния компонента
+    const [asteroids, setAsteroids] = useState<{
+        id: string;
+        name: string;
+        date: string;
+        distance: {
+            kilometers: number;
+            lunar: number
+        };
+        size: number;
+        isDangerous: boolean
+    }[]>([]);  //астероиды //хук для хранения внутреннего состояния компонента
     const [onlyDangerous, setOnlyDangerous] = useState(false);  //признак "опасных" астероидов
     const [distanceMode, setDistanceMode] = useState(true);    //тип единиц для отображения расстояния (true - км)
 
@@ -27,7 +37,7 @@ export const Asteroids = () => {
                     name: item.name,
                     date: close.close_approach_date,
                     distance: {kilometers: close.miss_distance.kilometers, lunar: close.miss_distance.lunar},
-                    size: mediumSize,
+                    size: mediumSize as unknown as number,
                     isDangerous: item.is_potentially_hazardous_asteroid
                 }
             });
@@ -42,7 +52,7 @@ export const Asteroids = () => {
         <Header/>
         <div className={styles.displaySettings}>
             <div className={styles.showDangerousOnly}>
-                <input type={"checkbox"} value={onlyDangerous} onChange={() => setOnlyDangerous(!onlyDangerous)}></input>
+                <input type={"checkbox"} value={onlyDangerous as unknown as string} onChange={() => setOnlyDangerous(!onlyDangerous)}></input>
                 Показать только опасные
             </div>
             <div className={styles.distanceMode}>
@@ -72,8 +82,6 @@ const generateAsteroids = () => {
 
     //цикл для генерации случайных астероидов
     for (let i = 0; i < 10; i++) {
-        //уникальный идентификатор астероида
-        const id = name;
         //наименование из 4 символов
         const name = characters[(Math.random() * 25).toFixed(0)] + characters[(Math.random() * 25).toFixed(0)] +
                      characters[(Math.random() * 25).toFixed(0)] + characters[(Math.random() * 25).toFixed(0)];
@@ -85,6 +93,8 @@ const generateAsteroids = () => {
         const size = (Math.random() * 100 + 10).toFixed(0);
         //признак опасности (true, если >= 0.5)
         const isDangerous = Math.random() >= 0.5;
+        //уникальный идентификатор астероида
+        const id = name;
         result.push({id, name, date, distance, size, isDangerous});
     }
 
