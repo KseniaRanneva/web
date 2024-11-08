@@ -1,4 +1,4 @@
-import styles from "./AsteroidCardContent.module.css"
+import styles from "./AsteroidCardContent.module.css";
 
 //Определение типа для props
 type AsteroidCardContentProps = {
