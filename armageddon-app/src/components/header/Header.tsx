@@ -12,7 +12,7 @@ export const Header = memo(() => {
                     {getUserKey() === 'DEMO_KEY' ? 'Ввести API-ключ' : 'Изменить API-ключ'}
                 </button>
                 {inputOpened ? (
-                    <input className={styles.apiInput} onChange={(ev) => {
+                    <input className={styles.apiInput} data-testID={"api_key_input"} onChange={(ev) => {
                             if (ev.target.value.length == 40) {
                                 localStorage.setItem('API_KEY', ev.target.value);
                                 setInputOpened(false);
