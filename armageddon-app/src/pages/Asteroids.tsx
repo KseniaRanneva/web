@@ -58,7 +58,6 @@ export const Asteroids = () => {
                     };
                 });
                 setAsteroids(asteroids);
-                //setAsteroids(generateAsteroids());
             })
             .catch((err) => {
                 console.log(err);

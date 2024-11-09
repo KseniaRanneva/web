@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
+import HistoryRouter, { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import { getUserKey } from '../../utils/getUserKey';
-import { useState } from 'react';
+import {memo, useState} from 'react';
 
-export const Header = () => {
+export const Header = memo(() => {
     const [inputOpened, setInputOpened] = useState(false);
     return (
         <div>
@@ -35,4 +35,6 @@ export const Header = () => {
             </div>
         </div>
     );
-};
+});
+
+Header.displayName = "Header";  //установка displayName для Header (из-за "обертки" memo)
