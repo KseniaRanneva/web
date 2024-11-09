@@ -10,7 +10,9 @@ export const Destroyment = () => {
     return (
         <div className={styles.container}>
             <Header />
-            {destroyment.map(item => <AsteroidCard key={item.id} {...item} />)}
+            {destroyment.map((item) => {
+                return <AsteroidCard key={item.id} {...item} />;
+            })}
         </div>
     );
 };

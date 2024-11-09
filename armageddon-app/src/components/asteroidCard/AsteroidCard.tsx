@@ -31,6 +31,7 @@ export const AsteroidCard = (props: AsteroidCardProps) => {
                     date={date}
                     distance={distance}
                     size={size}
+                    isDangerous={isDangerous}
                 />
                 <AsteroidCardAction id={id} isDangerous={isDangerous} onClick={() => destroyment.find(item => item.id == props.id) ? deleteAsteroid(props) : addAsteroid(props)}/>
             </div>

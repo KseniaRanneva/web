@@ -14,6 +14,12 @@ export const AsteroidsContextProvider: FC<AsteroidsContextProviderProps> = ({
     const [onlyDangerous, setOnlyDangerous] = useState(false); //признак "опасных" астероидов
     const [distanceMode, setDistanceMode] = useState(true); //тип единиц для отображения расстояния (true - км)
     const [destroyment, setDestroyment] = useState([]); //массив астероидов для уничтожения
+    const [choosedAsteroid, setChoosedAsteroid] = useState(null); //выбранный астероид
+
+    //выбор астероида
+    const addChoosedAsteroid = (asteroid) => {
+        setChoosedAsteroid(asteroid);
+    };
 
     //добавление астероида в список на уничтожение
     const addAsteroid = (asteroid) => {
@@ -34,7 +40,10 @@ export const AsteroidsContextProvider: FC<AsteroidsContextProviderProps> = ({
                 setDistanceMode,
                 destroyment,
                 addAsteroid,
-                deleteAsteroid
+                deleteAsteroid,
+
+                choosedAsteroid,
+                addChoosedAsteroid
             }}
         >
             {children}

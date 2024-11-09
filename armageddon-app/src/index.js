@@ -1,13 +1,13 @@
 import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import {createBrowserRouter, createHashRouter, RouterProvider} from 'react-router-dom';
 import { Asteroids } from './pages/Asteroids';
 import { Destroyment } from './pages/Destroyment';
 import { Asteroid } from './pages/Asteroid';
 import { AsteroidsContextProvider } from "./components/asteroidsContext/AsteroidsContext";
 
-const router = createHashRouter([
+const router = createBrowserRouter([
     {
         //Весь список астероидов
         path: '/asteroids',
