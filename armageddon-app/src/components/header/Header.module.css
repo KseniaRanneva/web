@@ -19,3 +19,15 @@
 .headerLink {
     padding: 5px;
 }
+
+.apiContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+.apiInput {
+    width: 300px;
+}

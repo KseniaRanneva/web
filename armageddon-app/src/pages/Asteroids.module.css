@@ -5,7 +5,7 @@
 }
 
 .showDangerousOnly {
-
+    display: block;
 }
 
 .displaySettings {

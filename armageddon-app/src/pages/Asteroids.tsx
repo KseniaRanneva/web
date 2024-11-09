@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import styles from './Asteroids.module.css';
 import { AsteroidCard } from '../components/asteroidCard/AsteroidCard';
 import { AsteroidsContext } from '../components/asteroidsContext/AsteroidsContext';
+import { getUserKey } from "../utils/getUserKey";
 
 export const Asteroids = () => {
     const [asteroids, setAsteroids] = useState<
@@ -22,7 +23,7 @@ export const Asteroids = () => {
     //Загрузка астероидов с API NASA        //запуск "эффектов"
     useEffect(() => {
         const result = fetch(
-            'https://api.nasa.gov/neo/rest/v1/feed?api_key=DEMO_KEY'
+            `https://api.nasa.gov/neo/rest/v1/feed?api_key=${getUserKey()}`
         )
             .then((res) => {
                 return res.json();
@@ -40,7 +41,9 @@ export const Asteroids = () => {
                     const mediumSize = (
                         (item.estimated_diameter.meters.estimated_diameter_max +
                             item.estimated_diameter.meters
-                                .estimated_diameter_min) / 2).toFixed(1);
+                                .estimated_diameter_min) /
+                        2
+                    ).toFixed(1);
                     const close = item.close_approach_data[0]; //данные о сближении
                     return {
                         id: item.id,
@@ -55,6 +58,7 @@ export const Asteroids = () => {
                     };
                 });
                 setAsteroids(asteroids);
+                //setAsteroids(generateAsteroids());
             })
             .catch((err) => {
                 console.log(err);
@@ -62,6 +66,7 @@ export const Asteroids = () => {
             });
     }, []);
 
+    //получение данных из контекста
     const { onlyDangerous, setOnlyDangerous, distanceMode, setDistanceMode } = useContext(AsteroidsContext);
 
     return (
